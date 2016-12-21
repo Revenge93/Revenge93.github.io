@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <title>Inköpslista</title>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="main.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Arbutus|Chewy|Kaushan+Script" rel="stylesheet">
+</head>
+<body>
+    <div>
+      <header>
+        <h1><a href="index.html">Din digitala receptbok</a></h1>
+      </header>
+    </div>
+    <nav>
+      <button class="nav"><a href="mina.html">Mina recept</a></button>
+      <button class="nav"><a href="star.html">Stjärnmärka recept</a></button>
+      <button class="nav"><a href="inspo.html">Insperation</a></button>
+      <button class="nav"><a href="shopping.html">Inköpslista</a></button>
+    </nav>
+    <main class="shopp">
+    <div>
+      <ul>
+        <li class="banana"><a href="#" class="lägg-till" data-name="Banan" data-pris="11.22">Banan 11.22 kr/kg</a></li>
+        <li class="apple"><a href="#" class="lägg-till" data-name="Äpple" data-pris="5">Äpple 5 kr/kg</a></li>
+        <li class="carrot"><a href="#" class="lägg-till" data-name="Morot" data-pris="4">Morot 4 kr/kg</a></li>
+        <li class="butter"><a href="#" class="lägg-till" data-name="Smör" data-pris="20">Smör 20 kr</a></li>
+        <li class="cooffe"><a href="#" class="lägg-till" data-name="Kaffe" data-pris="50">Kaffe 50 kr</a></li>
+      </ul>
+      <button id="rensa-inköpslista">Rensa inköpslista</button>
+    </div>
+
+    <div>
+      <ul id="visa-lista"></ul>
+      <div>Antalet varor som du har lagt till är <span id="antal-varor"></span></div>
+      <div>Totalkostnad: <span id="totalKostnad"></span> kr</div>
+    </div>
+      <script src="shoppingLista.js"></script>
+      <script>
+
+        $(".lägg-till").click(function(event){
+          event.preventDefault();
+          var namn = $(this).attr("data-name");
+          var pris = Number($(this).attr("data-pris"));
+
+          myList93.addItemToCart(namn, pris, 1);
+          displayCart();
+        });
+
+        $("#rensa-inköpslista").click(function(event){
+          myList93.clearCart();
+          displayCart();
+        })
+
+        function displayCart() {
+          var cartArray = myList93.listCart();
+          console.log(cartArray);
+          var output = "";
+          for (var i in cartArray) {
+            output += "<li>"
+              +cartArray[i].namn
+              +" <input class='add-item' type='number' data-name='"
+              +cartArray[i].namn
+              +"' value='"+cartArray[i].antal+"' >"
+              +" x "+cartArray[i].pris
+              +" = "+cartArray[i].total
+              +" <button class='plus-item' data-name='"
+              +cartArray[i].namn+"'>+</button>"
+              +" <button class='sub-item' data-name='"
+              +cartArray[i].namn+"'>-</button>"
+              +" <button class='delete-item' data-name='"
+              +cartArray[i].namn+"'>X</button>"
+              +"</li>";
+          }
+
+          $("#visa-lista").html(output);
+          $("#antal-varor").html( myList93.countCart() );
+          $("#totalKostnad").html( myList93.totalCart() );
+
+        }
+
+        $("#visa-lista").on("click", ".delete-item", function(event) {
+          var name = $(this).attr("data-name");
+          myList93.removeItemFromCartAll(name);
+          displayCart();
+        })
+
+        $("#visa-lista").on("click", ".sub-item", function(event) {
+          var name = $(this).attr("data-name");
+          myList93.removeItemFromCart(name);
+          displayCart();
+        })
+
+        $("#visa-lista").on("click", ".plus-item", function (event){
+          var name = $(this).attr("data-name");
+          myList93.addItemToCart(name, 0, 1);
+          displayCart();
+        })
+
+        $("#visa-lista").on("change", ".add-item", function(event) {
+          var namn = $(this).attr("data-name");
+          var antal  = Number( $(this).val() );
+          myList93.setCountForItem(namn, antal);
+          displayCart();
+        })
+
+        displayCart();
+     </script>
+     <script src="main.js"></script>
+    </main>
+</body>
+</html>

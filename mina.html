@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="sv">
+  <head>
+    <title>Din digitala receptbok</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="main.css">
+    <link href="https://fonts.googleapis.com/css?family=Arbutus|Chewy|Kaushan+Script" rel="stylesheet">
+  </head>
+  <body>
+    <main>
+      <div>
+        <header>
+          <h1><a href="index.html">Din digitala receptbok</a></h1>
+        </header>
+      </div>
+      <nav>
+        <button class="nav"><a href="mina.html">Mina recept</a></button>
+        <button class="nav"><a href="star.html">Stjärnmärka recept</a></button>
+        <button class="nav"><a href="inspo.html">Insperation</a></button>
+        <button class="nav"><a href="shopping.html">Inköpslista</a></button>
+      </nav>
+      <div class="container">
+      <form id="matInput" action="insert.php" method="post">
+        <div>
+        <label for="titel">Titel:</label>
+        <input type="text" name="titel" id="titel">
+        </div>
+        <div>
+        <label for="portioner">Antal portioner:</label>
+        <input type="text" name="portioner" id="portioner">
+        </div>
+        <div>
+        <label for="ingred">Fyll i ingredienserna här:</label>
+        <textarea name="ingred" rows="5" cols="40" id="ingred"></textarea>
+        </div>
+        <div>
+        <label for="metod">Tillagningsmetod:</label>
+        <textarea name="metod" rows="5" cols="40" id="metod"> </textarea>
+        </div>
+        <div id="theSubmit">
+        <input id="spara" type="submit" value="Spara recept">
+        </div>
+       </form>
+      <table>
+        <thead>
+          <tr>
+            <td colspan="2">Mina sparade recepet</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Namn</td>
+            <td>Antal stjärnor</td>
+          </tr>
+          <tr>
+            <td>Namn</td>
+            <td>Antal stjärnor</td>
+          </tr>
+          <tr>
+            <td>Namn</td>
+            <td>Antal stjärnor</td>
+          </tr>
+          <tr>
+            <td>Namn</td>
+            <td>Antal stjärnor</td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </main>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>

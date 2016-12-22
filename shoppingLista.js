@@ -114,3 +114,11 @@ var myList93 = (function() {
 
 
 })();
+
+$(document).ready(function(e) {
+  $("form").submit(function(e){
+    console.log("heu");
+    alert("Endast en demo :D");
+    e.preventDefault(e);
+  });
+});
